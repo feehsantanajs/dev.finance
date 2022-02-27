@@ -11,7 +11,7 @@ const Modal= {
     close(){                 
         //abrir modal
         //adicionar a class active ao modal
-        /* const blocModal = document.getSelection(".modal-overlay")
+        /* const blocModal = document.getSelection(".modal-overlay")                
         blocModal.style.color="#000000";*/
         document
         .querySelector(".modal-overlay")
@@ -85,6 +85,7 @@ const Transaction = {
     total(){
         //entradas - saidas
       let total = Transaction.income() + Transaction.expense()
+
       return total
     }
 }
@@ -130,14 +131,22 @@ const DOM = {
     },  
 
     updateBalance(){
-         
+    
+    let box = document.getElementById("box-total")  
         
         
-      document.getElementById("incomeDisplay").innerHTML = Utils.formatCurrency(Transaction.income())
-      document.getElementById("expenseDisplay").innerHTML =Utils.formatCurrency(Transaction.expense())
-      document.getElementById("totalDisplay").innerHTML = Utils.formatCurrency(Transaction.total())
- 
-    },
+    document.getElementById("incomeDisplay").innerHTML = Utils.formatCurrency(Transaction.income())
+    document.getElementById("expenseDisplay").innerHTML =Utils.formatCurrency(Transaction.expense())
+
+    if(Transaction.total() < 0 ){    
+        box.style.backgroundColor = "#e92929"    
+    }else{
+        box.style.backgroundColor = "#49AA26";
+        
+    }
+
+    document.getElementById("totalDisplay").innerHTML = Utils.formatCurrency(Transaction.total())
+},
 
     clearTransactions(){
         DOM.transactionsContainer.innerHTML = "";
